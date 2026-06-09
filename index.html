@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiscretaFATEC - Assistente de Matemática Discreta</title>
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <h1>DiscretaFATEC <i class="fa-solid fa-calculator"></i></h1>
+      <p>O seu assistente interativo de Matemática Discreta</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" onclick="openTab('relacoes')"><i class="fa-solid fa-diagram-project"></i> Relações Binárias</button>
+      <button class="tab-btn" onclick="openTab('logica')"><i class="fa-solid fa-table"></i> Tabela Verdade</button>
+      <button class="tab-btn" onclick="openTab('grafos')"><i class="fa-solid fa-circle-nodes"></i> Teoria dos Grafos</button>
+      <button class="tab-btn" onclick="openTab('teoria')"><i class="fa-solid fa-book"></i> Biblioteca de Conceitos</button>
+      <button class="tab-btn" onclick="openTab('algebra')"><i class="fa-solid fa-matrix"></i> Álgebra Linear</button>
+    </nav>
+
+    <main class="content">
+      
+      <section id="relacoes" class="tab-content active">
+        <h2>Analisador de Relações Binárias</h2>
+        <p>Clique nas células para definir a relação (1 = existe relação)</p>
+        <div class="controls">
+          <label>Tamanho do Conjunto (n): </label>
+          <input type="number" id="matrixSize" value="3" min="1" max="8" onchange="createMatrix()">
+        </div>
+        <div id="matrixContainer" class="matrix-grid"></div>
+        <div class="results-grid" id="matrixResults"></div>
+      </section>
+
+      <section id="logica" class="tab-content">
+        <h2>Calculadora de Tabela Verdade</h2>
+        <p>Use letras maiúsculas (P, Q, R...) e os operadores abaixo.</p>
+        <div class="input-group">
+          <div class="toolbar">
+            <button type="button" class="tool-btn" onclick="inserir('¬')">¬ Não</button>
+            <button type="button" class="tool-btn" onclick="inserir('∧')">∧ E</button>
+            <button type="button" class="tool-btn" onclick="inserir('∨')">∨ Ou</button>
+            <button type="button" class="tool-btn" onclick="inserir('⊕')">⊕ Xor</button>
+            <button type="button" class="tool-btn" onclick="inserir('→')">→ Condicional</button>
+            <button type="button" class="tool-btn" onclick="inserir('↔')">↔ Bicondicional</button>
+          </div>
+          <div class="search-box">
+            <input type="text" id="expressao" placeholder="Ex: (P ∧ Q) → R">
+            <button id="btnCalc" class="action-btn" onclick="gerarTabelaVerdade()"><i class="fa-solid fa-gears"></i> Calcular</button>
+          </div>
+        </div>
+        <div id="tableTrue" class="table-wrapper"></div>
+      </section>
+
+      <section id="grafos" class="tab-content">
+        <h2>Simulador de Grafo (Matriz de Adjacência)</h2>
+        <p>Configure a matriz abaixo. Se a célula <span class="math-expr">M<sub>i,j</sub> = 1</span>, significa que existe uma aresta saindo do vértice <span class="math-expr">V<sub>i</sub></span> para o vértice <span class="math-expr">V<sub>j</sub></span>.</p>
+        
+        <div class="controls">
+          <label>Quantidade de Vértices: </label>
+          <input type="number" id="graphSize" value="4" min="1" max="8" onchange="createGraphMatrix()">
+        </div>
+
+        <div id="graphMatrixContainer" class="matrix-grid"></div>
+        
+        <div class="results-info">
+          <h3>Grau de cada Vértice:</h3>
+          <ul id="graphDegrees" class="degree-list"></ul>
+        </div>
+      </section>
+
+      <section id="teoria" class="tab-content">
+        <h2>Guia Rápido de Sobrevivência</h2>
+        <p>Aprenda a ler o que as calculadoras estão processando:</p>
+        
+        <div class="accordion">
+          <div class="concept-card">
+            <h4><i class="fa-solid fa-link"></i> Relação Transitiva</h4>
+            <p>Se um elemento <span class="math-expr">A</span> se relaciona com <span class="math-expr">B</span>, e <span class="math-expr">B</span> se relaciona com <span class="math-expr">C</span>, então obrigatoriamente <span class="math-expr">A</span> deve se relacionar com <span class="math-expr">C</span>. Pense nisso como uma "ponte de amizade". Se a ponte direta não existir, a relação não é transitiva.</p>
+          </div>
+          
+          <div class="concept-card">
+            <h4><i class="fa-solid fa-bolt"></i> O Teorema do Aperto de Mãos (Grafos)</h4>
+            <p>Em qualquer grafo ordenado, a soma dos graus de todos os vértices é igual ao <strong>dobro do número de arestas</strong>. Isso acontece porque cada aresta tem duas pontas, logo, ela adiciona +1 de grau para dois vértices diferentes simultaneamente!</p>
+          </div>
+
+          <div class="concept-card">
+            <h4><i class="fa-solid fa-brain"></i> Por que isso importa na TI?</h4>
+            <ul>
+              <li><strong>Bancos de Dados SQL:</strong> Funcionam puramente baseados na Teoria dos Conjuntos (os famosos <code>JOINs</code> são interseções de conjuntos).</li>
+              <li><strong>Inteligência Artificial:</strong> Redes Neurais nada mais são do que Grafos Gigantescos calculando pesos e conexões entre nós.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section id="algebra" class="tab-content">
+        <h2>Transformações Lineares no ℛ²</h2>
+        <p>Insira as coordenadas de um ponto ou vértice $P(x, y)$ e escolha a transformação geométrica.</p>
+
+        <div class="input-group">
+          <div class="search-box">
+            <input type="number" id="pontoX" placeholder="Coordenada X" value="2">
+            <input type="number" id="pontoY" placeholder="Coordenada Y" value="3">
+          </div>
+
+          <div class="controls">
+            <label>Selecione a Transformação: </label>
+            <select id="tipoTransformacao" class="search-box" style="width: 100%; max-width: 300px; background: var(--bg-dark); color: white; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+              <option value="refX">Reflexão no eixo X</option>
+              <option value="refY">Reflexão no eixo Y</option>
+              <option value="refOrigem">Reflexão na Origem</option>
+              <option value="refBissetriz1">Reflexão na reta y = x (1ª Bissetriz)</option>
+              <option value="rot90Horario">Rotação de 90° (Sentido Horário)</option>
+              <option value="rot90Anti">Rotação de 90° (Sentido Anti-Horário)</option>
+              <option value="dilatacao2">Dilatação de Fator k=2 (Eixo X e Y)</option>
+            </select>
+          </div>
+
+          <button class="action-btn algebra" onclick="calcularTransformacao()"><i class="fa-solid fa-play"></i> Transformar Ponto</button>
+        </div>
+
+        <div class="results-info" id="resultadoAlgebra" style="display:none; margin-top: 20px;">
+          <h3>Resultado da Transformação:</h3>
+          <div class="prop-card true" id="cardAlgebra"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      Desenvolvido para Monitoria de Matemática Discreta - Fatec 2026
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

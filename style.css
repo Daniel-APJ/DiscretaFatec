@@ -1,0 +1,238 @@
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.1);
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.1);
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 850px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+}
+
+header h1 { margin: 0 0 5px 0; color: #a5b4fc; font-size: 24px; }
+header p { color: var(--text-muted); margin: 0 0 25px 0; font-size: 14px; }
+
+/* Sistema de Abas */
+.tabs {
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.tab-btn:hover, .tab-btn.active {
+  color: #fff;
+  background: var(--primary);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Estilos do Módulo 1: Relações */
+.controls { margin-bottom: 1.5rem; font-size: 15px; }
+.controls input {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: white;
+  padding: 6px;
+  border-radius: 4px;
+  width: 60px;
+  text-align: center;
+}
+
+.matrix-grid {
+  display: grid;
+  gap: 6px;
+  justify-content: center;
+  margin: 20px auto;
+  background: var(--bg-dark);
+  padding: 12px;
+  border-radius: 8px;
+  width: fit-content;
+  border: 1px solid var(--border);
+}
+
+.cell {
+  width: 45px;
+  height: 45px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-main);
+  transition: all 0.2s;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.cell:hover { background: #334155; }
+.cell.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.prop-card {
+  padding: 15px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border-left: 5px solid var(--border);
+}
+.prop-card.true { border-left-color: var(--success); background: var(--success-bg); }
+.prop-card.false { border-left-color: var(--danger); background: var(--danger-bg); }
+
+/* Estilos do Módulo 2: Lógica */
+.input-group { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; }
+.tool-btn {
+  background: #334155;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.tool-btn:hover { background: #475569; }
+
+.search-box { display: flex; gap: 10px; }
+.search-box input {
+  flex: 1;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+}
+
+.action-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  max-width: 500px;
+}
+.action-btn:hover { background: var(--primary-hover); }
+
+.action-btn.algebra {
+  padding: 10px 15px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.table-wrapper { overflow-x: auto; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; background: var(--bg-dark); border-radius: 6px; overflow: hidden; }
+th, td { border: 1px solid var(--border); padding: 12px; text-align: center; }
+th { background-color: rgba(255,255,255,0.05); color: #a5b4fc; }
+.true { color: var(--success); font-weight: bold; }
+.false { color: var(--danger); font-weight: bold; }
+
+.footer { margin-top: 2.5rem; text-align: center; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 15px; }
+
+/* Estilos para a nova aba de Grafos e Teoria */
+.degree-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.degree-item {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 15px;
+  border-radius: 6px;
+  border-left: 4px solid #a5b4fc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.concept-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.concept-card h4 {
+  margin: 0 0 8px 0;
+  color: #a5b4fc;
+}
+
+.concept-card p, .concept-card ul {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.concept-card ul { padding-left: 20px; }
+
+/* Estilização para expressões matemáticas simples */
+.math-expr {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #e2e8f0; /* Um tom ligeiramente mais claro para destacar do texto comum */
+  padding: 0 2px;
+}
+
+/* Garante que o número subscrito não quebre a altura da linha do parágrafo */
+.math-expr sub {
+  font-style: normal; /* O índice (i, j) geralmente não é itálico */
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  bottom: -0.25em;
+}
