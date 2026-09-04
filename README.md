@@ -175,6 +175,7 @@ A proposta é transformar conteúdos teóricos em experiências interativas de a
 ## 👨‍🏫 Autor
 
 Daniel Alexandre Pedro Júnior
+
 Desenvolvido para a Monitoria de Matemática Discreta da Fatec.
 
 **DiscretaFATEC © 2026**
